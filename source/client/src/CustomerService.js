@@ -5,7 +5,7 @@ export default class CustomersService {
     constructor(){}
 
     getCustomers() {
-        const url = `${API_URL}/api/source/`;
+        const url = `${API_URL}/api/customers/`;
         return axios.get(url).then(response => response.data);
     }  
 
