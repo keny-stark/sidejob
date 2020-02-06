@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from webapp import views
 from django.conf.urls import url
+from accounts.views import registration_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/customers/$', views.customers_list),
     url(r'^api/customers/(?P<pk>[0-9]+)$', views.customers_detail),
+    path('register/', registration_view, name="register"),
 ]
