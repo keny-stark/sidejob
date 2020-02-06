@@ -4,9 +4,10 @@ from rest_framework.decorators import api_view
 
 from accounts.serialazers import RegistrationSerializer
 
-
+print('dod')
 @api_view(['POST', ])
 def registration_view(request):
+    print('im her')
     if request.method == 'POST':
         serializer = RegistrationSerializer(data=request.data)
         data = {}

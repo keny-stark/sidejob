@@ -12,7 +12,7 @@ export default class CustomersService {
     createUser(data) {
         console.log(data, 'data');
         
-        const url = `${API_URL}/register/`;
+        const url = `${API_URL}/accounts/register/`;
         return axios.post(url, data);
     }
 
