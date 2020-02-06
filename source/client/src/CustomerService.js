@@ -7,6 +7,13 @@ export default class CustomersService {
     getCustomers() {
         const url = `${API_URL}/api/customers/`;
         return axios.get(url).then(response => response.data);
-    }  
+    }
+    
+    createUser(data) {
+        console.log(data, 'data');
+        
+        const url = `${API_URL}/register/`;
+        return axios.post(url, data);
+    }
 
 }

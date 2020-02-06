@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
+import React,{Component} from 'react';
+import {Toolbar} from './components/UI/Toolbar/Toolbar'
+import { BrowserRouter,Switch, Route } from 'react-router-dom';
+import Register from './components/Rgister/Register';
+import Login from './components/Rgister/Login';
+import {Container} from 'reactstrap'
 
-import  CustomersService  from  './CustomerService';
-const customersService  =  new CustomersService();
+
 class App extends Component {
-  state = {
-    list: []
-  };
-
-  componentDidMount() {
-    customersService.getCustomers().then((result) => {
-      console.log(result.data)
-        this.setState({
-          list: result.data
-        })
-    })
-}
   render() {
     return (
-          <Card body>
-            {this.state.list.map(item => (
-              <CardTitle>{item.first_name}</CardTitle>
+      <>
+        <BrowserRouter>
+        <Toolbar/>
+            <Container>
+              <Switch>
 
-            ))}
-          <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-          <Button>Go somewhere</Button>
-        </Card>
+              <Route path="/login" exact component={Login}/>
+              <Route path="/register" exact component={Register}/>
+              </Switch>
+            </Container>
+        </BrowserRouter>
+      </>  
     );
   }
 
