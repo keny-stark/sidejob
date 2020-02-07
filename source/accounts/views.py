@@ -1,12 +1,9 @@
-from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect
+from django.contrib.auth import login
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
-from django.contrib.auth import login as django_login
-from accounts.serialazers import RegistrationSerializer, LoginSerializer
-from django.contrib.auth.models import User
-from accounts.models import Token
+from accounts.serialazers import LoginSerializer, UserRegisterSerializer, UserSerializer
+from rest_framework.permissions import AllowAny
 
 
 class LogoutView(APIView):
@@ -19,28 +16,16 @@ class LogoutView(APIView):
         return Response({'status': 'ok'})
 
 
-@api_view(['POST', ])
-def register_view(request):
-    if request.method == 'POST':
-        serializer = RegistrationSerializer(data=request.data)
-        data = {}
+class RegisterApiView(APIView):
+    parser_classes = [JSONParser]
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = UserRegisterSerializer(data=data)
         if serializer.is_valid():
-            account = serializer.save()
-            data['response'] = 'successfully registered new user.'
-            data['email'] = account.email
-            data['username'] = account.username
-        else:
-            data = serializer.errors
-        return Response(data)
-
-
-class LoginView(APIView):
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data["user"]
-        django_login(request, user)
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key}, status=200)
-
-
+            user = serializer.save()
+            return Response(UserSerializer(instance=user).data)
+        response = Response(serializer.errors)
+        response.status_code = 400
+        return response
