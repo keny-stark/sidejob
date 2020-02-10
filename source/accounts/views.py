@@ -1,15 +1,17 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
-from accounts.serialazers import LoginSerializer, UserRegisterSerializer, UserSerializer
+from accounts.serialazers import UserRegisterSerializer, UserSerializer
 from rest_framework.permissions import AllowAny
 
 
 class LogoutView(APIView):
     permission_classes = []
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
+        print(request)
+        print(request.user)
         user = request.user
         if user.is_authenticated:
             user.auth_token.delete()
