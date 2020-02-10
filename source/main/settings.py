@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'webapp',
 ]
 
+# CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware'
 ]
-
+CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [

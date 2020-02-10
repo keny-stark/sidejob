@@ -1,12 +1,12 @@
 import React from 'react'
-import {NavLink as RouterNavLink, useHistory} from 'react-router-dom';
-
+import {NavLink as RouterNavLink} from 'react-router-dom';
 import {
     NavItem,
     NavLink
 } from 'reactstrap';
+
+
 const AnonymousMenu = () => {
-    const history = useHistory()
     return (
     <>    
     <NavItem>

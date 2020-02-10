@@ -10,7 +10,7 @@ import {
     Nav,
   } from 'reactstrap';
 
-export const Toolbar = ({user}) => {
+export const Toolbar = ({user, logout}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -21,7 +21,7 @@ export const Toolbar = ({user}) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar style={{alignItems: 'baseline'}}>
 
-          {user ? <UserMenu user={user}/>: <AnonymousMenu/>}
+          {user ? <UserMenu user={user} logout={logout}/>: <AnonymousMenu/>}
 
           </Nav>
         </Collapse>
