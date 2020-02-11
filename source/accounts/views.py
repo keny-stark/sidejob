@@ -1,4 +1,3 @@
-from django.contrib.auth import login, logout
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
@@ -7,12 +6,10 @@ from rest_framework.permissions import AllowAny
 
 
 class LogoutView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
 
-    def post(self, request):
-        print(request)
-        print(request.user)
-        user = request.user
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
         if user.is_authenticated:
             user.auth_token.delete()
         return Response({'status': 'ok'})

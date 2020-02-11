@@ -50,7 +50,7 @@ export const logoutUser = (user) => {
     console.log(user, 'user');
     
     return dispatch => {
-        axios({url: '/accounts/logout/', method: "post", data:{user}, withCredentials: true, headers: {"X-CSRFToken": Cookies.get('csrftoken')}})
+        axios({url: '/accounts/logout/', method: "post", data:{user}, withCredentials: true})
         .then(response => {
             dispatch({type: LOGOUT_USER})
             dispatch(push('/'))
