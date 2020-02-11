@@ -1,5 +1,4 @@
 import axios from '../../axios-api';
-import Cookies from 'js-cookie';
 import {push} from 'connected-react-router';
 
 
@@ -20,7 +19,6 @@ export const loginUserSuccess = user => ({type: LOGIN_USER_SUCCESS, user});
 export const loginUserFailure = error  => ({type: LOGIN_USER_FAILURE, error});
 
 export const LOGOUT_USER = 'LOGOUT_USER';
-// export const logoutUserSuccess = () => ({type: LOGOUT_USER});
 
 
 export const registerUser = userData => {
@@ -50,8 +48,8 @@ export const logoutUser = (user) => {
     console.log(user, 'user');
     
     return dispatch => {
-        axios({url: '/accounts/logout/', method: "post", data:{user}, withCredentials: true})
-        .then(response => {
+        axios({url: '/accounts/logout/', method: "post", data:{user}})
+        .then(() => {
             dispatch({type: LOGOUT_USER})
             dispatch(push('/'))
         })
