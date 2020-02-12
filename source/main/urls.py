@@ -15,15 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
 from webapp import views
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
 
+router = routers.DefaultRouter()
+router.register(r'signboard', views.SignboardViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/customers/$', views.customers_list),
-    url(r'^api/customers/(?P<pk>[0-9]+)$', views.customers_detail),
+    url(r'^api/signboard/$', views.SignboardViewSet),
+    path('', include(router.urls)),
     path('accounts/', include('accounts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

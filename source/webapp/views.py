@@ -3,7 +3,7 @@ from rest_framework.permissions import SAFE_METHODS
 from .serializers import *
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class SignboardViewSet(viewsets.ModelViewSet):
     serializer_class = SignboardSerializer
     queryset = Signboard.objects.all()
 
