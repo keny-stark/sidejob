@@ -7,6 +7,8 @@ import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 
 
 import userReducer from './reducers/userReducer';
+import singboardsReducer from './reducers/singboardReducer';
+
 
 export const history = createBrowserHistory();
 
@@ -14,6 +16,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
     router: connectRouter(history),
     users: userReducer,
+    singboards: singboardsReducer
 })
 
 const persistedState = loadFromLocalStorage();
