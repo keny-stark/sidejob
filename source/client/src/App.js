@@ -7,7 +7,7 @@ import {Container} from 'reactstrap';
 import {connect} from 'react-redux'
 import {logoutUser} from './store/actions/userActions'
 import {withRouter} from "react-router-dom";
-
+import Signboard from './containers/Signboard/Signboard';
 class App extends Component {
 
   
@@ -15,13 +15,14 @@ class App extends Component {
     return (
       <>
         <Toolbar user={this.props.user} logout={this.props.logoutUser}/>
-            <Container>
-              <Switch>
 
-              <Route path="/login" exact component={Login}/>
-              <Route path="/register" exact component={Register}/>
-              </Switch>
-            </Container>
+        <Container>
+          <Switch>
+          <Route path="/" exact component={Signboard}/>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/register" exact component={Register}/>
+          </Switch>
+        </Container>
       </>  
     );
   }
